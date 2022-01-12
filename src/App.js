@@ -11,7 +11,7 @@ class App extends Component {
         <Typography variant="h3" align="center">
           Registration Form
         </Typography>
-        <RegistrationForm onSubmit={formSubmit} />
+        <RegistrationForm onSubmit={formSubmit} validateId={validateId} />
       </Container>
     );
   }
@@ -19,6 +19,12 @@ class App extends Component {
 
 function formSubmit(data) {
   console.log(data);
+}
+
+function validateId(id) {
+  if (id.length !== 11) {
+    return { valid: false, text: "ID must have 11 digits." };
+  } else return { valid: true, text: "" };
 }
 
 export default App;

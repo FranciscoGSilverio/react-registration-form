@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
 
-function RegistrationForm({onSubmit}) {
+function RegistrationForm({ onSubmit, validateId }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [id, setId] = useState("");
   const [offers, setOffers] = useState(true);
   const [news, setNews] = useState(true);
+  const [errors, setErrors] = useState({ id: { valid: true, text: "" } });
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit({name, lastName, id, offers, news });
+        onSubmit({ name, lastName, id, offers, news });
       }}
     >
       <TextField
@@ -42,6 +43,12 @@ function RegistrationForm({onSubmit}) {
         onChange={(event) => {
           setId(event.target.value);
         }}
+        onBlur={(event) => {
+          const isValid = validateId(id);
+          setErrors({id:isValid});
+        }}
+        error={!errors.id.valid}
+        helperText={errors.id.text}
         id="id"
         label="ID"
         variant="outlined"
