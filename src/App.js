@@ -1,14 +1,18 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
+import { Container, Typography } from "@mui/material";
+import "@fontsource/roboto/300.css";
 
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <h1>Registration Form</h1>
+      <Container component="article" maxWidth="sm">
+        <Typography variant="h3" align="center">
+          Registration Form
+        </Typography>
         <RegistrationForm />
-      </Fragment>
+      </Container>
     );
   }
 }
