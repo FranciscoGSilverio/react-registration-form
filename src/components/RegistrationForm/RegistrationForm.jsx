@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
 
-function RegistrationForm({ onSubmit, validateId }) {
+function RegistrationForm({
+  onSubmit,
+  validateId,
+  validateName,
+  validateLastName,
+}) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [id, setId] = useState("");
   const [offers, setOffers] = useState(true);
   const [news, setNews] = useState(true);
-  const [errors, setErrors] = useState({ id: { valid: true, text: "" } });
+  const [IDerrors, setIdErrors] = useState({ id: { valid: true, text: "" } });
+  const [nameErrors, setNameErrors] = useState({
+    name: { valid: true, text: "" },
+  });
+  const [lastNameErrors, setLastNameErrors] = useState({
+    lastName: { valid: true, text: "" },
+  });
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit({ name, lastName, id, offers, news });
+        onSubmit({name, lastName, id, offers, news})
       }}
     >
       <TextField
@@ -21,6 +32,12 @@ function RegistrationForm({ onSubmit, validateId }) {
         onChange={(event) => {
           setName(event.target.value);
         }}
+        onBlur={(event) => {
+          let isValid = validateName(name);
+          setNameErrors({ name: isValid });
+        }}
+        error={!nameErrors.name.valid}
+        helperText={nameErrors.name.text}
         id="name"
         label="Name"
         variant="outlined"
@@ -32,6 +49,12 @@ function RegistrationForm({ onSubmit, validateId }) {
         onChange={(event) => {
           setLastName(event.target.value);
         }}
+        onBlur={(event) => {
+          let isValid = validateLastName(lastName);
+          setLastNameErrors({ lastName: isValid });
+        }}
+        error={!lastNameErrors.lastName.valid}
+        helperText={lastNameErrors.lastName.text}
         id="lastname"
         label="Last Name"
         variant="outlined"
@@ -44,11 +67,11 @@ function RegistrationForm({ onSubmit, validateId }) {
           setId(event.target.value);
         }}
         onBlur={(event) => {
-          const isValid = validateId(id);
-          setErrors({id:isValid});
+          let isValid = validateId(id);
+          setIdErrors({ id: isValid });
         }}
-        error={!errors.id.valid}
-        helperText={errors.id.text}
+        error={!IDerrors.id.valid}
+        helperText={IDerrors.id.text}
         id="id"
         label="ID"
         variant="outlined"
