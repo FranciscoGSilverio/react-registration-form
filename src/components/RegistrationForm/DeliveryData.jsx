@@ -17,11 +17,26 @@ function DeliveryData() {
         type="text"
         variant="outlined"
         margin="normal"
+        fullWidth
       />
       <TextField
         id="number"
         label="Number"
         type="number"
+        variant="outlined"
+        margin="normal"
+      />
+      <TextField
+        id="state"
+        label="State"
+        type="text"
+        variant="outlined"
+        margin="normal"
+      />
+      <TextField
+        id="city"
+        label="City"
+        type="text"
         variant="outlined"
         margin="normal"
       />
