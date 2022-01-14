@@ -4,12 +4,7 @@ import DeliveryData from "./DeliveryData";
 import PersonalData from "./PersonalData";
 import UserData from "./UserData";
 
-function RegistrationForm({
-  onSubmit,
-  validateId,
-  validateName,
-  validateLastName,
-}) {
+function RegistrationForm({ onSubmit, validations }) {
   const [currentStage, setCurrentStage] = useState(0);
   const [collectedData, setCollectedData] = useState({});
 
@@ -21,14 +16,9 @@ function RegistrationForm({
   });
 
   const forms = [
-    <UserData onSubmit={collectData} />,
-    <PersonalData
-      onSubmit={collectData}
-      validateId={validateId}
-      validateName={validateName}
-      validateLastName={validateLastName}
-    />,
-    <DeliveryData onSubmit={collectData} />,
+    <UserData onSubmit={collectData} validations={validations} />,
+    <PersonalData onSubmit={collectData} validations={validations} />,
+    <DeliveryData onSubmit={collectData} validations={validations} />,
     <Typography variant="h5" align="center">
       Thank you for your registration
     </Typography>,

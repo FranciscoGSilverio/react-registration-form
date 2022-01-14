@@ -1,43 +1,43 @@
 import React, { useState } from "react";
-import { Button, TextField, Switch, FormControlLabel } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Switch,
+  FormControlLabel,
+  Box,
+} from "@mui/material";
 
-function PersonalData({
-  onSubmit,
-  validateId,
-  validateName,
-  validateLastName,
-}) {
-  const [name, setName] = useState("");
+function PersonalData({ onSubmit, validations }) {
+  const [theName, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [id, setId] = useState("");
   const [offers, setOffers] = useState(true);
   const [news, setNews] = useState(true);
-  const [IDerrors, setIdErrors] = useState({ id: { valid: true, text: "" } });
-  const [nameErrors, setNameErrors] = useState({
-    name: { valid: true, text: "" },
-  });
-  const [lastNameErrors, setLastNameErrors] = useState({
-    lastName: { valid: true, text: "" },
-  });
+  const [errors, setErrors] = useState({ id: { valid: true, text: "" } });
+
+  function validateField(event) {
+    const { name, value } = event.target;
+    const newState = { ...errors };
+    newState[name] = validations[name](value);
+    setErrors(newState);
+  }
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit({ name, lastName, id, offers, news });
+        onSubmit({ theName, lastName, id, offers, news });
       }}
     >
       <TextField
-        value={name}
+        value={theName}
         onChange={(event) => {
           setName(event.target.value);
         }}
-        onBlur={(event) => {
-          let isValid = validateName(name);
-          setNameErrors({ name: isValid });
-        }}
-        error={!nameErrors.name.valid}
-        helperText={nameErrors.name.text}
+        onBlur={validateField}
+        error={!errors.id.valid}
+        name="name"
+        helperText={errors.id.text}
         id="name"
         label="Name"
         variant="outlined"
@@ -49,12 +49,10 @@ function PersonalData({
         onChange={(event) => {
           setLastName(event.target.value);
         }}
-        onBlur={(event) => {
-          let isValid = validateLastName(lastName);
-          setLastNameErrors({ lastName: isValid });
-        }}
-        error={!lastNameErrors.lastName.valid}
-        helperText={lastNameErrors.lastName.text}
+        onBlur={validateField}
+        name="lastName"
+        error={!errors.id.valid}
+        helperText={errors.id.text}
         id="lastname"
         label="Last Name"
         variant="outlined"
@@ -66,12 +64,10 @@ function PersonalData({
         onChange={(event) => {
           setId(event.target.value);
         }}
-        onBlur={(event) => {
-          let isValid = validateId(id);
-          setIdErrors({ id: isValid });
-        }}
-        error={!IDerrors.id.valid}
-        helperText={IDerrors.id.text}
+        onBlur={validateField}
+        name="id"
+        error={!errors.id.valid}
+        helperText={errors.id.text}
         id="id"
         label="ID"
         variant="outlined"
@@ -104,10 +100,12 @@ function PersonalData({
           />
         }
       />
-
-      <Button type="submit" variant="contained">
-        REGISTER
-      </Button>
+      <br />
+      <Box textAlign="center">
+        <Button type="submit" variant="contained">
+          REGISTER
+        </Button>
+      </Box>
     </form>
   );
 }

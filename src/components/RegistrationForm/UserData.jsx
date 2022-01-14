@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 import React, { useState } from "react";
 
 function UserData({ onSubmit }) {
@@ -37,10 +37,12 @@ function UserData({ onSubmit }) {
         margin="normal"
         fullWidth
       />
-      <br/>
-      <Button type="submit" variant="contained" align="center">
-        REGISTER
-      </Button>
+      <br />
+      <Box textAlign="center">
+        <Button type="submit" variant="contained">
+          REGISTER
+        </Button>
+      </Box>
     </form>
   );
 }
