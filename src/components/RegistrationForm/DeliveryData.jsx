@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 
-function DeliveryData() {
+function DeliveryData({ onSubmit }) {
+  const [zipCode, setZipCode] = useState("");
+  const [adress, setAdress] = useState("");
+  const [number, setNumber] = useState("");
+  const [state, setTheState] = useState("");
+  const [city, setCity] = useState("");
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit({ zipCode, adress, number, state, city });
+      }}
+    >
       <TextField
+        value={zipCode}
+        onChange={(event) => {
+          setZipCode(event.target.value);
+        }}
         id="zipCode"
         label="Zip Code"
         type="number"
@@ -12,6 +26,10 @@ function DeliveryData() {
         margin="normal"
       />
       <TextField
+        value={adress}
+        onChange={(event) => {
+          setAdress(event.target.value);
+        }}
         id="adress"
         label="Adress"
         type="text"
@@ -20,6 +38,10 @@ function DeliveryData() {
         fullWidth
       />
       <TextField
+        value={number}
+        onChange={(event) => {
+          setNumber(event.target.value);
+        }}
         id="number"
         label="Number"
         type="number"
@@ -27,6 +49,10 @@ function DeliveryData() {
         margin="normal"
       />
       <TextField
+        value={state}
+        onChange={(event) => {
+          setTheState(event.target.value);
+        }}
         id="state"
         label="State"
         type="text"
@@ -34,6 +60,10 @@ function DeliveryData() {
         margin="normal"
       />
       <TextField
+        value={city}
+        onChange={(event) => {
+          setCity(event.target.value);
+        }}
         id="city"
         label="City"
         type="text"

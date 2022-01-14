@@ -11,6 +11,7 @@ class App extends Component {
         <Typography variant="h3" align="center">
           Registration Form
         </Typography>
+        <br/>
         <RegistrationForm
           onSubmit={formSubmit}
           validateId={validateId}
