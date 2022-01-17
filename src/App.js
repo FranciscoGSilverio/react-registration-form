@@ -3,7 +3,13 @@ import "./App.css";
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm";
 import { Container, Typography } from "@mui/material";
 import "@fontsource/roboto/300.css";
-import {validateId, validateName, validateLastName, validatePassword} from "./models/registration"
+import {
+  validateId,
+  validateName,
+  validateLastName,
+  validatePassword,
+} from "./models/registration";
+import RegisterValidations from "./contexts/RegisterValidations";
 
 class App extends Component {
   render() {
@@ -13,15 +19,16 @@ class App extends Component {
           Registration Form
         </Typography>
         <br />
-        <RegistrationForm
-          onSubmit={formSubmit}
-          validations={{
+        <RegisterValidations.Provider
+          value={{
             id: validateId,
             name: validateName,
             lastName: validateLastName,
             password: validatePassword,
           }}
-        />
+        >
+          <RegistrationForm onSubmit={formSubmit} />
+        </RegisterValidations.Provider>
       </Container>
     );
   }

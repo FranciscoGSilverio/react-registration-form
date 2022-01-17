@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   TextField,
@@ -6,15 +6,25 @@ import {
   FormControlLabel,
   Box,
 } from "@mui/material";
+import RegisterValidations from "../../contexts/RegisterValidations"
+import useErrors from "../../hooks/useErrors";
 
-function PersonalData({ onSubmit, validations }) {
+function PersonalData({ onSubmit }) {
   const [theName, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [id, setId] = useState("");
   const [offers, setOffers] = useState(true);
   const [news, setNews] = useState(true);
-  const [errors, setErrors] = useState({ id: { valid: true, text: "" } });
+  const validations = useContext(RegisterValidations);
+  const [errors, validateField, canSubmit] = useErrors(validations);
 
+
+
+  /*const [errors, setErrors] = useState({
+    id: { valid: true, text: "" },
+    name: { valid: true, text: "" },
+    lastName: {valid: true, text: ""},
+  });
   function validateField(event) {
     const { name, value } = event.target;
     const newState = { ...errors };
@@ -22,11 +32,23 @@ function PersonalData({ onSubmit, validations }) {
     setErrors(newState);
   }
 
+  
+  function canSubmit() {
+    for (let field in errors) {
+      if (!errors[field].valid) {
+        return false;
+      }
+    }
+    return true;
+  }*/
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit({ theName, lastName, id, offers, news });
+        if (canSubmit()) {
+          onSubmit({ theName, lastName, id, offers, news });
+        }
       }}
     >
       <TextField
@@ -35,9 +57,9 @@ function PersonalData({ onSubmit, validations }) {
           setName(event.target.value);
         }}
         onBlur={validateField}
-        error={!errors.id.valid}
+        error={!errors.name.valid}
+        helperText={errors.name.text}
         name="name"
-        helperText={errors.id.text}
         id="name"
         label="Name"
         variant="outlined"
@@ -51,8 +73,8 @@ function PersonalData({ onSubmit, validations }) {
         }}
         onBlur={validateField}
         name="lastName"
-        error={!errors.id.valid}
-        helperText={errors.id.text}
+        error={!errors.lastName.valid}
+        helperText={errors.lastName.text}
         id="lastname"
         label="Last Name"
         variant="outlined"
@@ -103,7 +125,7 @@ function PersonalData({ onSubmit, validations }) {
       <br />
       <Box textAlign="center">
         <Button type="submit" variant="contained">
-          REGISTER
+          NEXT
         </Button>
       </Box>
     </form>

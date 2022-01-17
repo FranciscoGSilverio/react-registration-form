@@ -4,21 +4,20 @@ import DeliveryData from "./DeliveryData";
 import PersonalData from "./PersonalData";
 import UserData from "./UserData";
 
-function RegistrationForm({ onSubmit, validations }) {
+function RegistrationForm({ onSubmit }) {
   const [currentStage, setCurrentStage] = useState(0);
   const [collectedData, setCollectedData] = useState({});
 
   useEffect(() => {
     if (currentStage === forms.length - 1) {
-      console.log(collectedData);
       onSubmit(collectedData);
     }
   });
 
   const forms = [
-    <UserData onSubmit={collectData} validations={validations} />,
-    <PersonalData onSubmit={collectData} validations={validations} />,
-    <DeliveryData onSubmit={collectData} validations={validations} />,
+    <UserData onSubmit={collectData} />,
+    <PersonalData onSubmit={collectData} />,
+    <DeliveryData onSubmit={collectData} />,
     <Typography variant="h5" align="center">
       Thank you for your registration
     </Typography>,
