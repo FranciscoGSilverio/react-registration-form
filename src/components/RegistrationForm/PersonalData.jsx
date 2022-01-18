@@ -18,30 +18,6 @@ function PersonalData({ onSubmit }) {
   const validations = useContext(RegisterValidations);
   const [errors, validateField, canSubmit] = useErrors(validations);
 
-
-
-  /*const [errors, setErrors] = useState({
-    id: { valid: true, text: "" },
-    name: { valid: true, text: "" },
-    lastName: {valid: true, text: ""},
-  });
-  function validateField(event) {
-    const { name, value } = event.target;
-    const newState = { ...errors };
-    newState[name] = validations[name](value);
-    setErrors(newState);
-  }
-
-  
-  function canSubmit() {
-    for (let field in errors) {
-      if (!errors[field].valid) {
-        return false;
-      }
-    }
-    return true;
-  }*/
-
   return (
     <form
       onSubmit={(event) => {

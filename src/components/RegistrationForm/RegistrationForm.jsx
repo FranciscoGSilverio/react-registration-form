@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import DeliveryData from "./DeliveryData";
 import PersonalData from "./PersonalData";
 import UserData from "./UserData";
+import PaymentData from "./PaymentData";
 
 function RegistrationForm({ onSubmit }) {
   const [currentStage, setCurrentStage] = useState(0);
@@ -17,6 +18,7 @@ function RegistrationForm({ onSubmit }) {
   const forms = [
     <UserData onSubmit={collectData} />,
     <PersonalData onSubmit={collectData} />,
+    <PaymentData onSubmit={collectData} />,
     <DeliveryData onSubmit={collectData} />,
     <Typography variant="h5" align="center">
       Thank you for your registration
@@ -42,7 +44,10 @@ function RegistrationForm({ onSubmit }) {
           <StepLabel>Personal</StepLabel>
         </Step>
         <Step>
-          <StepLabel>Delivey</StepLabel>
+          <StepLabel>Payment</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Delivery</StepLabel>
         </Step>
         <Step>
           <StepLabel>Finish</StepLabel>

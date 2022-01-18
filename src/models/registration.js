@@ -33,4 +33,64 @@ function validatePassword(password) {
   }
 }
 
-export {validateId, validateName, validateLastName, validatePassword};
+function validateCardNumber(cardNumber) {
+  if (cardNumber.length !== 16) {
+    return {
+      valid: false,
+      text: "Your card number must have 16 digits ",
+    };
+  } else if (isNaN(cardNumber)) {
+    return {
+      valid: false,
+      text: "Your card number can't contain letters ",
+    };
+  } else {
+    return { valid: true, text: "" };
+  }
+}
+
+function validateCardOwner(cardOwner) {
+  if (cardOwner.length === 0) {
+    return {
+      valid: false,
+      text: "Still didn't fill thsi field",
+    };
+  } else if (!isNaN(cardOwner)) {
+    return {
+      valid: false,
+      text: "The card owner name can't contain numbers.",
+    };
+  } else
+    return {
+      valid: true,
+      text: "",
+    };
+}
+
+function validateSecurityCode(securityCode) {
+  if (securityCode.length !== 3) {
+    return {
+      valid: false,
+      text: "Your security code must have 3 digits.",
+    };
+  } else if (isNaN(securityCode)) {
+    return {
+      valid: false,
+      text: "Your security code must contain only numbers.",
+    };
+  } else
+    return {
+      valid: true,
+      text: "",
+    };
+}
+
+export {
+  validateId,
+  validateName,
+  validateLastName,
+  validatePassword,
+  validateCardNumber,
+  validateCardOwner,
+  validateSecurityCode,
+};

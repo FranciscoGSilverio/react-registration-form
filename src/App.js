@@ -8,6 +8,9 @@ import {
   validateName,
   validateLastName,
   validatePassword,
+  validateCardNumber,
+  validateCardOwner,
+  validateSecurityCode
 } from "./models/registration";
 import RegisterValidations from "./contexts/RegisterValidations";
 
@@ -25,6 +28,9 @@ class App extends Component {
             name: validateName,
             lastName: validateLastName,
             password: validatePassword,
+            cardNumber: validateCardNumber,
+            cardOwner: validateCardOwner,
+            securityCode: validateSecurityCode,
           }}
         >
           <RegistrationForm onSubmit={formSubmit} />
