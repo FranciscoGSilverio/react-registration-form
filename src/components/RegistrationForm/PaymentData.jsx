@@ -1,5 +1,12 @@
 import React, { useState, useContext } from "react";
-import { TextField, Button, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Box,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import useErrors from "../../hooks/useErrors";
 import RegisterValidations from "../../contexts/RegisterValidations";
 
@@ -9,12 +16,14 @@ function PaymentData({ onSubmit }) {
   const [securityCode, setSecurityCode] = useState("");
   const validations = useContext(RegisterValidations);
   const [errors, validateField, canSubmit] = useErrors(validations);
+  const [cardFlag, setCardFlag] = useState("");
 
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (canSubmit()) onSubmit({ cardNumber, cardOwner, securityCode });
+        if (canSubmit())
+          onSubmit({ cardNumber, cardOwner, securityCode, cardFlag });
       }}
     >
       <TextField
@@ -64,6 +73,24 @@ function PaymentData({ onSubmit }) {
         variant="outlined"
         margin="normal"
       />
+      <br />
+      <InputLabel id="cardFlag">Card Flag</InputLabel>
+      <Select
+        variant="outlined"
+        labelId="cardFlag"
+        id="cardFlag"
+        value={cardFlag}
+        label="Card Flag"
+        onChange={(event) => {
+          setCardFlag(event.target.value);
+        }}
+      >
+        <MenuItem value={"MastercardCredit"}>Mastercard Credit</MenuItem>
+        <MenuItem value={"MastercardDebit"}>Mastercard Debit</MenuItem>
+        <MenuItem value={"VisaCredit"}>Visa Credit</MenuItem>
+        <MenuItem value={"VisaDebit"}>Visa Debit</MenuItem>
+      </Select>
+
       <br />
       <Box textAlign="center">
         <Button type="submit" variant="contained">
