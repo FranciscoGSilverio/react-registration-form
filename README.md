@@ -12,5 +12,6 @@
   <li/>The Material UI library was used to help prototyping the project's layout with the TextField, Button, Switch, Stepper among other components. 
   <li/>After Alura's classes were finished I added a new section and validations for the form as a challenge: 
   Implement the payment section with the card number, card owner, card flag and security code fields and validations for each one.
+  <li/>Since there is still no back-end implementation, when you finish the registration all your data will be printed as an object on the browser console.
 </ul>
 
